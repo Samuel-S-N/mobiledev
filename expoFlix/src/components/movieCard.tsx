@@ -1,30 +1,44 @@
-import { Movie } from "@/types/movie.type";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { APIMOVIES } from "@/types/api_movie.type";
+import { useRouter } from "expo-router";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 
-//AQUI TEMOS UMA PROP CHAMADA 'item' DO TIPO 'Movie'. O 'Movie' É UM ARQUIVO QUE ESTA DENTRO DA PASTA TYPES.
+//COMPLETE O PROPS movie PARA UTILIZAR A TIPAGEM DA API
 type Props = {
-  item: Movie;
+  movie: APIMOVIES;
 };
 
-//COMPLETE OS VALORES DO OBJETO PARA QUE FUNCINE.
-export const MovieCard = ({ item }: Props) => {
+export const MovieCard = ({ movie }: Props) => {
+  const router = useRouter();
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={styles.card}
+      onPress={() =>
+        router.push({
+          pathname: "/movie/[id]",
+          params: {
+            id: movie.id,
+            title: movie.title,
+          },
+        })
+      }
+    >
       <Image
-        source={{ uri: item.poster }}
+        source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
         style={styles.image}
         resizeMode="contain"
       />
       <View>
-        <Text style={styles.titleMovie}>{item.title}</Text>
-        <Text>{item.description}</Text>
-        <Text>Lang: {item.language}</Text>
+        <Text style={styles.titleMovie}>{movie.title}</Text>
+        <Text>{movie.release_date}</Text>
+        <Text>Lang: {movie.original_language}</Text>
         <View style={styles.rank}>
-          <Text>Rank:</Text>
-          <Text style={{ color: "yellow" }}>{item.rank}</Text>
+          <Text>Avaliação:</Text>
+          <Text style={{ color: "yellow" }}>
+            {Math.round(movie.vote_average * 10)}% ({movie.vote_count} votos)
+          </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -39,19 +53,21 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   titleMovie: {
-    fontWeight: "500",
+    color: "white",
     fontSize: 16,
+    fontWeight: "bold",
   },
-  containerCard: {
-    flexDirection: "row",
-    gap: 4,
-  },
+  containerCard: {},
   image: {
-    width: 80,
-    height: 110,
+    width: 100,
+    height: 150,
+    borderRadius: 8,
+    backgroundColor: "white",
+    marginRight: 8,
+    flexShrink: 0,
+    alignSelf: "center",
+    marginVertical: 8,
+    marginLeft: 0,
   },
-  rank: {
-    flexDirection: "row",
-    gap: 4,
-  },
+  rank: {},
 });

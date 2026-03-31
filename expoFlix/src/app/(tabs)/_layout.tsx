@@ -14,7 +14,7 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="dashboard"
+        name="(movies)"
         options={{
           title: "filmes",
           tabBarLabel: "Filmes",

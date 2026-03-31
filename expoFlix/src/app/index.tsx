@@ -1,7 +1,9 @@
 import { InputComponent } from "@/components/inputComponent";
+import { LoginContext } from "@/context/loginContext";
+import { EmailRegex } from "@/utils/email-regex";
 import { useRouter, type Href } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 export default function Login() {
@@ -11,37 +13,34 @@ export default function Login() {
 
   const router = useRouter();
 
-  //FAZER A LÓGICA PARA NAVEGAR PARA O DASHBOARD
+  const { login, isErro} = useContext(LoginContext);
+
   const handlerLogin = () => {
-    //REGRAS PARA IR PARA A PRÓXIMA TELA
-    //1 - OS CAMPOS NÃO PODEM FICAR VAZIOS
-    if (email === "" || password === ""){
-        setIsError("Preencha todos os campos para continuar")
-        return;
-        }
-    //2 - O EMAIL DEVE SER UM EMAIL VÁLIDO, OU SEJA, VERIFICAR SE TEM O '@' NO TEXTO
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(email)){
-        setIsError("Digite um email válido");
-        return;
-        }
-    //3 - A SENHA DEVE TER NO MINIMO 6 CARACTERES
+    if (email === "" || password === "") {
+      setIsError("Campos não podem ficar vazios.");
+      return;
+    }
+    const isEmail = EmailRegex(email);
+
+    if (!isEmail) {
+      setIsError("Email precisa ser válido");
+      return;
+    }
     if (password.length < 6) {
-        setIsError("A senha deve ter no minimo 6 caracteres");
-        return;
-        }
-    //4 - USUÁRIO E SENHA DEVE SER IGUAL A: boanoite.punpun@gmail.com e BoanoitePunpun
-    if (email !== "boanoite.punpun@gmail.com" || password !== "BoanoitePunpun"){
-        setIsError("Email ou senha incorretos");
-        return;
-        }
-    //5 - APÓS CONTEMPLAR TODAS AS REGRAS, FAZER A NAVEGAÇÃO PARA A PRÓXIMA TELA
-    //CASO ALGUMA REGRA SEJA QUEBRADA, DEVE APARECER UMA MENSAGEM DE ERRO.
-    router.replace("/(tabs)/dashboard" as Href);
+      setIsError("Senha deve ter minimo de 6 caracteres");
+      return;
+    }
+    if (
+      email !== process.env.EXPO_PUBLIC_EMAIL ||
+      password !== process.env.EXPO_PUBLIC_PASSWORD
+    ) {
+      setIsError("Usuário e/ou Senha incorretos.");
+      return;
+    }
+    setIsError("");
+    router.replace("/dashboard" as Href);
   };
 
-  //NOTE QUE TEMOS UMA TAG CHAMADA 'InputComponent'. ESSE COMPONENTE ESTA NA PASTA COMPONENTE.
-  //VÁ ATÉ A PASTA COMPONENTE E COMPLETE O CÓDIGO DO ARQUIVO PARA QUE FUNCIONE.
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ExpoFlix</Text>
@@ -59,7 +58,7 @@ export default function Login() {
         value={password}
         setValue={setPassword}
       />
-      {!!isError && <Text style={styles.errorMessage}>{isError}</Text>}
+      {isError && <Text style={styles.errorMessage}>{isError}</Text>}
       <TouchableOpacity style={styles.button} onPress={handlerLogin}>
         <Text style={styles.buttonTitle}>Entrar</Text>
       </TouchableOpacity>
@@ -93,6 +92,7 @@ const styles = StyleSheet.create({
   errorMessage: {
     alignSelf: "center",
     color: "#F5482F",
+    fontSize: 18,
   },
   button: {
     backgroundColor: "#86A16C",

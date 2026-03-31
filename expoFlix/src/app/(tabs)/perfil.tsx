@@ -1,9 +1,12 @@
+import { LoginContext } from "@/context/loginContext";
 import { useRouter } from "expo-router";
+import { useContext } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-//AQUI COMPLETE O CSS DA TELA. DEIXE MINIMAMENTE PARECIDO COM A IMAGEM.
 export default function Perfil() {
   const router = useRouter();
+
+  const {user, logout} = useContext(LoginContext)
 
   return (
     <View style={styles.container}>
@@ -12,7 +15,7 @@ export default function Perfil() {
         <Image
           style={styles.avatar}
           resizeMode="cover"
-          source={require("../../../assets/images/punpun.jpg")}
+          source={user?.image}
         />
         <Text style={styles.text}>Nome: Punpun</Text>
         <Text style={styles.text}>Email: boanoite.punpun@gmail.com</Text>
@@ -30,43 +33,44 @@ export default function Perfil() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "#19244B",
+    padding: 8,
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
+    justifyContent: "center",
   },
   perfil: {
-    fontSize: 14,
-    color: "#333",
+    color: "#fff",
+    fontSize: 40,
+    fontWeight: "600",
   },
-
   perfilContainer: {
-    padding: 10,
-    margin: 10,
-    backgroundColor: "#e0e0e0",
-  },
-
-  text: {
-    fontSize: 14,
-    color: "#000",
-  },
-
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "#ccc",
-  },
-
-  button: {
-    padding: 10,
-    backgroundColor: "#007BFF",
-    borderRadius: 5,
+    marginTop: 20,
+    justifyContent: "center",
     alignItems: "center",
   },
-  
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 100,
+    marginBottom: 10,
+  },
+  text: {
+    color: "#fff",
+    fontSize: 18,
+  },
+  button: {
+    backgroundColor: "#fff",
+    width: 300,
+    height: 35,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+  },
   btnTitle: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#fff",
-  }
+    fontWeight: "400",
+    color: "#19244b",
+  },
 });
+

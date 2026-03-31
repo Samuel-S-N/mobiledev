@@ -5,7 +5,6 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
-//COMPLETE OS TIPOS QUE ESTÃO FALTANDO NO PROPS
 type Props = {
   placeholder: string;
   label: string;
@@ -14,8 +13,6 @@ type Props = {
   setValue: (data: string) => void;
 };
 
-//COMPLETE OS PROPS DENTRO DO TextInput. PREENCHA CORRETAMENTE. E INSIRA O NOME DOS CAMPOS. 
-//LEMBRANDO QUE TODAS AS INFORMAÇÕES ESTÃO VINDO DO COMPONENTE PAI. AS INFORMAÇÕES TEM QUE SER DINÂMICAS.
 export const InputComponent = ({
   placeholder,
   label,
@@ -31,6 +28,7 @@ export const InputComponent = ({
         placeholder={placeholder}
         autoCapitalize="none"
         keyboardType={type}
+        secureTextEntry={type === "default"}
         value={value}
         onChangeText={(data: string) => setValue(data)}
       />
