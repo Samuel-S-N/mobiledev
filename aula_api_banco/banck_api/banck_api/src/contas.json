@@ -1,0 +1,80 @@
+[
+  {
+    "id": "haz0ctb",
+    "nome": "Conta Um",
+    "saldo": 0
+  },
+  {
+    "id": "pow2i28",
+    "nome": "Conta Dois",
+    "saldo": 100
+  },
+  {
+    "id": "ndqc3q3",
+    "nome": "Conta Dois",
+    "saldo": 50,
+    "transacoes": [
+      {
+        "id": "a35yf56",
+        "tipo": "deposito",
+        "valor": 100,
+        "data": "2026-05-12T21:19:01.283Z",
+        "descricao": "Depósito de R$ 100 realizado com sucesso."
+      },
+      {
+        "id": "8m8rqpw",
+        "tipo": "saque",
+        "valor": 50,
+        "data": "2026-05-12T21:22:21.138Z",
+        "descricao": "Saque de R$ 50 realizado com sucesso."
+      }
+    ]
+  },
+  {
+    "id": "t1h0cx0",
+    "usuarioId": "c3hdwgz",
+    "saldo": 0,
+    "transacoes": []
+  },
+  {
+    "id": "7w4erqy",
+    "usuarioId": "695mitc",
+    "saldo": 120,
+    "transacoes": [
+      {
+        "id": "ta7ginb",
+        "tipo": "deposito",
+        "valor": 150,
+        "data": "2026-05-19T22:01:59.667Z",
+        "descricao": "Depósito de R$ 150 realizado com sucesso."
+      },
+      {
+        "id": "podj268",
+        "tipo": "saque",
+        "valor": 30,
+        "data": "2026-05-19T22:02:09.012Z",
+        "descricao": "Saque de R$ 30 realizado com sucesso."
+      }
+    ]
+  },
+  {
+    "id": "n4ftjk3",
+    "usuarioId": "4kyx4bj",
+    "saldo": 500,
+    "transacoes": [
+      {
+        "id": "p8q07vv",
+        "tipo": "deposito",
+        "valor": 500,
+        "data": "2026-05-20T00:18:22.047Z",
+        "descricao": "Depósito de R$ 500 realizado com sucesso."
+      }
+    ]
+  },
+  {
+    "id": "fdsele0",
+    "usuarioId": "b635i2f",
+    "saldo": 0,
+    "transacoes": []
+  }
+]

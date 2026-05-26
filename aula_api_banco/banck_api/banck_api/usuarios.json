@@ -1,0 +1,30 @@
+[
+  {
+    "id": "c3hdwgz",
+    "nome": "João",
+    "email": "joao@email.com",
+    "senha": "$2b$10$H9vKdLwfHdKKSOyNYcpoZ.t4gebrQ9daoGQRuYHsm3yYnAw1pPrUu",
+    "contaId": "t1h0cx0"
+  },
+  {
+    "id": "695mitc",
+    "nome": "Eder Andrew",
+    "email": "ederandrew0028@gmail.com",
+    "senha": "$2b$10$a0UAXMg7JaF/X0SL1.QyBOpnFSJ4wW8BIlzVWKgcY5vZiwalOQGO6",
+    "contaId": "7w4erqy"
+  },
+  {
+    "id": "4kyx4bj",
+    "nome": "samuel",
+    "email": "samuel@gmail.com",
+    "senha": "$2b$10$ziRgUiQgAo60/0eyGJrNXOwg22wuw/rUHSc9/cs2tZLIEN0cCppfq",
+    "contaId": "n4ftjk3"
+  },
+  {
+    "id": "b635i2f",
+    "nome": "Vieira",
+    "email": "gay@gmail.com",
+    "senha": "$2b$10$TlMASSfSEy9hzeCWmc61lecyB8oHBn8B3CcF41UfkmCBs8U1FGCBm",
+    "contaId": "fdsele0"
+  }
+]
