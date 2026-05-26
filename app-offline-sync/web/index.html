@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="%LANG_ISO_CODE%">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>%WEB_TITLE%</title>
+    <style id="expo-reset">
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        overflow: hidden;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+    <!--
+      Registers a service worker that adds COOP + COEP headers to every
+      response, enabling cross-origin isolation so SharedArrayBuffer
+      (required by expo-sqlite's WASM backend) is available on web.
+      The page reloads once after the SW activates the first time.
+    -->
+    <script>
+      (() => {
+        if (typeof SharedArrayBuffer !== "undefined") return;
+        if (!("serviceWorker" in navigator)) return;
+
+        navigator.serviceWorker
+          .register("/coi-serviceworker.js")
+          .then((reg) => {
+            if (reg.active) {
+              location.reload();
+              return;
+            }
+            const sw = reg.installing || reg.waiting;
+            if (sw) {
+              sw.addEventListener("statechange", (e) => {
+                if (e.target.state === "activated") location.reload();
+              });
+            }
+          })
+          .catch((err) =>
+            console.error("[coi-serviceworker] registration failed", err)
+          );
+      })();
+    </script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
